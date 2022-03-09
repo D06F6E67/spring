@@ -58,21 +58,19 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 
 
 	/**
-	 * Create a new XmlBeanFactory with the given resource,
-	 * which must be parsable using DOM.
-	 * @param resource XML resource to load bean definitions from
-	 * @throws BeansException in case of loading or parsing errors
+	 * 使用给定的资源创建一个新的 XmlBeanFactory，必须可以使用 DOM 解析。
+	 * @param resource 用于加载 bean 定义的 XML 资源
+	 * @throws BeansException 在加载或解析错误的情况下
 	 */
 	public XmlBeanFactory(Resource resource) throws BeansException {
 		this(resource, null);
 	}
 
 	/**
-	 * Create a new XmlBeanFactory with the given input stream,
-	 * which must be parsable using DOM.
-	 * @param resource XML resource to load bean definitions from
+	 * 使用给定的输入流创建一个新的 XmlBeanFactory，必须可以使用 DOM 解析。
+	 * @param resource 用于加载 bean 定义的 XML 资源
 	 * @param parentBeanFactory parent bean factory
-	 * @throws BeansException in case of loading or parsing errors
+	 * @throws BeansException 在加载或解析错误的情况下
 	 */
 	public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException {
 		super(parentBeanFactory);

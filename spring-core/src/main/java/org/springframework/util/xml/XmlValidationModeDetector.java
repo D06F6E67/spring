@@ -74,7 +74,7 @@ public class XmlValidationModeDetector {
 
 
 	/**
-	 * Indicates whether or not the current parse position is inside an XML comment.
+	 * 指示当前解析位置是否在 XML 注释内。
 	 */
 	private boolean inComment;
 
@@ -95,15 +95,19 @@ public class XmlValidationModeDetector {
 			String content;
 			while ((content = reader.readLine()) != null) {
 				content = consumeCommentTokens(content);
+				// 注释行或者空行就跳过
 				if (this.inComment || !StringUtils.hasText(content)) {
 					continue;
 				}
+				// 如果包含DOCTYPE就认为是DTD格式
 				if (hasDoctype(content)) {
 					isDtdValidated = true;
 					break;
 				}
+				// 在读取到 < 就认为开始读取有意义的数据，结束验证模式。
+				// 验证模式一定在有意义的数据前
 				if (hasOpeningTag(content)) {
-					// End of meaningful data...
+					// 有意义的数据结束...
 					break;
 				}
 			}
@@ -121,7 +125,7 @@ public class XmlValidationModeDetector {
 
 
 	/**
-	 * Does the content contain the DTD DOCTYPE declaration?
+	 * 内容是否包含 DTD DOCTYPE 声明？
 	 */
 	private boolean hasDoctype(String content) {
 		return content.contains(DOCTYPE);

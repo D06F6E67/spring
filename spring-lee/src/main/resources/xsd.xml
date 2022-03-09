@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="testBean" class="com.lee.bean.TestBean"/>
+    <!--<bean id="testBean" name="#1,#2" class="com.lee.bean.TestBean"/>-->
+    <!--<bean name="#1,#2" class="com.lee.bean.TestBean"/>-->
+    <!--<bean class="com.lee.bean.TestBean"/>-->
+    <!--<bean class="com.lee.bean.TestBean"/>-->
+
+    <alias name="testBean" alias="testBean2"/>
+    <import resource="xsd-constructor-arg.xml"/>
+
+</beans>

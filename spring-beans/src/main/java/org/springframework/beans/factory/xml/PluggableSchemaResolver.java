@@ -77,9 +77,9 @@ public class PluggableSchemaResolver implements EntityResolver {
 
 
 	/**
-	 * Loads the schema URL -> schema file location mappings using the default
-	 * mapping file pattern "META-INF/spring.schemas".
-	 * @param classLoader the ClassLoader to use for loading
+	 * 使用默认值加载架构 URL -> 架构文件位置映射
+	 * 映射文件模式 "META-INF/spring.schemas".
+	 * @param classLoader 用于加载的 ClassLoader
 	 * (can be {@code null}) to use the default ClassLoader)
 	 * @see PropertiesLoaderUtils#loadAllProperties(String, ClassLoader)
 	 */
@@ -146,6 +146,7 @@ public class PluggableSchemaResolver implements EntityResolver {
 	 */
 	private Map<String, String> getSchemaMappings() {
 		Map<String, String> schemaMappings = this.schemaMappings;
+		// 如果没有被缓存则开始进行缓存
 		if (schemaMappings == null) {
 			synchronized (this) {
 				schemaMappings = this.schemaMappings;
@@ -154,12 +155,14 @@ public class PluggableSchemaResolver implements EntityResolver {
 						logger.debug("Loading schema mappings from [" + this.schemaMappingsLocation + "]");
 					}
 					try {
+						// this.schemaMappingsLocation在构造函数中已经被初始化为：META-INF/spring.schemas
 						Properties mappings =
 								PropertiesLoaderUtils.loadAllProperties(this.schemaMappingsLocation, this.classLoader);
 						if (logger.isDebugEnabled()) {
 							logger.debug("Loaded schema mappings: " + mappings);
 						}
 						schemaMappings = new ConcurrentHashMap<>(mappings.size());
+						// 将Properties格式文件合并到Map格式的schemaMappings中
 						CollectionUtils.mergePropertiesIntoMap(mappings, schemaMappings);
 						this.schemaMappings = schemaMappings;
 					}
