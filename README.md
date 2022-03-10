@@ -9,3 +9,4 @@
       resource/META-INF中是自定义标签所需的文件，
       xsd-custom.xml是自定义标签的使用
     3.myEventListener包中是spring提供的监听器的使用
+    4.factory中是对FactoryBean的使用

@@ -1,8 +1,10 @@
 import com.lee.bean.Hello;
 import com.lee.bean.TestBean;
 import com.lee.bean.custom.User;
+import com.lee.bean.factory.Car;
 import com.lee.bean.lookup.GetBeanTest;
 import com.lee.bean.replaced.TestChangeMethod;
+import com.lee.factory.CarFactoryBean;
 import org.junit.Test;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -87,6 +89,18 @@ public class AppTest {
         XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("xsd-custom.xml"));
         User testBean = (User) xmlBeanFactory.getBean("testBean");
         System.out.println(testBean.getUserName() + ", " + testBean.getEmail());
+    }
+
+    /**
+     * 自定义的标签解析
+     */
+    @Test
+    public void factory() {
+        XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("xsd-factory.xml"));
+        Car car = (Car) xmlBeanFactory.getBean("car");
+        CarFactoryBean carFactoryBean = (CarFactoryBean) xmlBeanFactory.getBean("&car");
+        System.out.println(car.getBrand() + ", " + car.getMaxSpeed() + ", " + car.getPrice());
+        System.out.println(carFactoryBean.getCarInfo());
     }
 
     /**
