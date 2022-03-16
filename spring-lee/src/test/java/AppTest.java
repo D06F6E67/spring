@@ -104,6 +104,20 @@ public class AppTest {
     }
 
     /**
+     * 自定义的标签解析
+     */
+    @Test
+    public void cycle() throws Throwable {
+        try {
+            new ClassPathXmlApplicationContext("xsd-cycle.xml");
+        } catch (Exception e) {
+            // 在创建testC的时候抛出异常
+            Throwable e1 = e.getCause().getCause().getCause();
+            throw e1;
+        }
+    }
+
+    /**
      * Cause: assert shortName != key断言的错误根源
      * docs.gradle' line: 156 会校验spring.schemas文件个内容格式，当格式不正确时就会报错
      * 其中使用的校验方法中的正则测试如下
